@@ -210,38 +210,6 @@ explicit grant from the SFTPGo Team (support@sftpgo.com).
         });
     }
 
-    function updateLanguageSwitcherMenu() {
-        const menuItems = $('#language_switcher_menu_items');
-        if (!menuItems.length) return;
-        menuItems.empty();
-        Object.keys(lngs).map((lng) => {
-            const isActive = lng === i18next.resolvedLanguage;
-            const item = $('<div class="menu-item px-3 my-0"></div>');
-            const link = $('<a href="#" class="menu-link px-3 py-2" data-lng="' + lng + '"></a>');
-            if (isActive) {
-                link.addClass('active');
-            }
-            const title = $('<span class="menu-title">' + lngs[lng].nativeName + '</span>');
-            link.append(title);
-            link.on('click', function(e) {
-                e.preventDefault();
-                const chosenLng = $(this).attr('data-lng');
-                if (chosenLng && chosenLng !== i18next.resolvedLanguage) {
-                    i18next.changeLanguage(chosenLng, () => {
-                        renderI18n();
-                        updateLanguageSwitcherMenu();
-                        var loginLanguageSwitcher = $('#languageSwitcher');
-                        if (loginLanguageSwitcher.length) {
-                            loginLanguageSwitcher.val(chosenLng).trigger('change');
-                        }
-                    });
-                }
-            });
-            item.append(link);
-            menuItems.append(item);
-        });
-    }
-
     function initLocalizer() {
         i18next
             .use(i18nextChainedBackend)
@@ -249,14 +217,7 @@ explicit grant from the SFTPGo Team (support@sftpgo.com).
             .init({
                 debug: false,
                 supportedLngs: Object.keys(lngs),
-                nonExplicitSupportedLngs: true,
                 fallbackLng: Object.keys(lngs)[0],
-                detection: {
-                    order: ['querystring', 'localStorage', 'navigator', 'htmlTag'],
-                    lookupQuerystring: 'lng',
-                    lookupLocalStorage: 'i18nextLng',
-                    caches: ['localStorage']
-                },
                 backend: {
                     backends: [
                         i18nextLocalStorageBackend,
@@ -291,20 +252,11 @@ explicit grant from the SFTPGo Team (support@sftpgo.com).
                                 const chosenLng = $(this).find("option:selected").attr('value');
                                 i18next.changeLanguage(chosenLng, () => {
                                     renderI18n();
-                                    updateLanguageSwitcherMenu();
                                 });
                             });
                         } else {
                             languageSwitcher.addClass("d-none");
                         }
-                    }
-
-                    var languageSwitcherContainer = $('#language_switcher_container');
-                    if (languageSwitcherContainer.length && Object.keys(lngs).length > 1) {
-                        languageSwitcherContainer.removeClass("d-none");
-                        updateLanguageSwitcherMenu();
-                    } else if (languageSwitcherContainer.length) {
-                        languageSwitcherContainer.addClass("d-none");
                     }
 
                     renderI18n();
@@ -869,21 +821,6 @@ explicit grant from the SFTPGo Team (support@sftpgo.com).
                 </span>
                 <span data-i18n="theme.system" class="menu-title">System</span>
             </a>
-        </div>
-    </div>
-</div>
-{{- end}}
-
-{{- define "language-switcher"}}
-<div id="language_switcher_container" class="d-flex align-items-center ms-1 ms-lg-2">
-    <a href="#" class="btn btn-icon btn-active-light-primary w-35px h-35px w-md-40px h-md-40px" data-kt-menu-trigger="{default:'click', lg: 'hover'}" data-kt-menu-attach="parent" data-kt-menu-placement="bottom-end">
-        <i class="ki-duotone ki-global fs-2">
-            <span class="path1"></span>
-            <span class="path2"></span>
-        </i>
-    </a>
-    <div class="menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-title-gray-700 menu-icon-gray-500 menu-active-bg menu-state-color fw-semibold py-4 fs-base w-150px" data-kt-menu="true">
-        <div id="language_switcher_menu_items">
         </div>
     </div>
 </div>
