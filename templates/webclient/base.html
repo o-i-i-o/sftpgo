@@ -16,6 +16,7 @@ explicit grant from the SFTPGo Team (support@sftpgo.com).
 {{- define "navitems"}}
 {{- block "additionalnavitems" .}}{{- end}}
 {{- if ne .CurrentURL .EditURL }}
+{{- template "language-switcher"}}
 {{- template "theme-switcher"}}
 {{- end}}
 <div class="d-flex align-items-center ms-2 ms-lg-3">
