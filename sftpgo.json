@@ -285,7 +285,12 @@
         "render_openapi": true,
         "base_url": "",
         "languages": [
-          "en"
+          "en",
+          "it",
+          "de",
+          "fr",
+          "es",
+          "zh-CN"
         ],
         "oidc": {
           "client_id": "",
