@@ -284,10 +284,6 @@
         "hide_login_url": 0,
         "render_openapi": true,
         "base_url": "",
-        "languages": [
-          "en",
-          "zh-CN"
-        ],
         "oidc": {
           "client_id": "",
           "client_secret": "",
