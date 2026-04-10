@@ -121,7 +121,7 @@ var (
 		HideLoginURL:         0,
 		RenderOpenAPI:        true,
 		BaseURL:              "",
-		Languages:            []string{"en"},
+		Languages:            []string{"en", "it", "de", "fr", "es", "zh-CN"},
 		OIDC: httpd.OIDC{
 			ClientID:                   "",
 			ClientSecret:               "",
